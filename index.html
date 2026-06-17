@@ -2,188 +2,211 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
-    />
-    <title>ACCESS GRANTED ❤️</title>
+    <title>Porsche Birthday Film</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <style>
-      :root {
-        --neon: #00ffd5;
-        --pink: #ff6fb7;
-        --bg: #04090f;
-      }
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;500;700&display=swap');
+
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
-      html,
+
       body {
+        height: 100vh;
+        overflow: hidden;
+        background: #000;
+        font-family: Montserrat;
+        /* font-family: 'Manrope', sans-serif; */
+        /* font-family: 'Poppins', sans-serif; */
+        color: white;
+      }
+
+      /* =========================
+   NETFLIX RED INTRO (FIXED)
+========================= */
+      #intro {
+        position: absolute;
         width: 100%;
         height: 100%;
-        overflow: hidden;
-      }
-      body {
-        position: fixed;
-        inset: 0;
-        font-family: 'Courier New', monospace;
-        background: radial-gradient(circle at top, #0f2027, var(--bg));
+        background: radial-gradient(circle at center, #2a0000, #000000);
         display: flex;
-        align-items: center;
         justify-content: center;
-        color: var(--neon);
-      }
-
-      /* Cinematic vignette */
-      #vignette {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 6;
-        background: radial-gradient(
-          circle at center,
-          rgba(0, 0, 0, 0) 55%,
-          rgba(0, 0, 0, 0.35) 75%,
-          rgba(0, 0, 0, 0.6) 100%
-        );
-        opacity: 0;
-        transition: opacity 0.8s ease;
-      }
-
-      /* Galaxy */
-      #galaxy {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-      }
-
-      /* QR HUD */
-      #qr {
-        position: fixed;
-        top: 14px;
-        left: 14px;
-        width: 120px;
-        height: 120px;
-        background: #000;
-        border-radius: 10px;
-        box-shadow: 0 0 25px rgba(0, 255, 213, 0.55);
-        z-index: 5;
-        display: none;
-      }
-
-      @media (max-width: 480px) {
-        #qr {
-          width: 60px;
-          height: 60px;
-        }
-      }
-
-      /* Card */
-      .card {
-        position: relative;
-        z-index: 2;
-        width: min(92vw, 700px);
-        padding: clamp(22px, 5vw, 38px);
-        border-radius: 26px;
-        background: rgba(0, 0, 0, 0.55);
-        backdrop-filter: blur(22px);
-        border: 1px solid rgba(0, 255, 213, 0.35);
-        box-shadow: 0 0 60px rgba(0, 255, 213, 0.25);
+        align-items: center;
+        flex-direction: column;
+        z-index: 1000;
+        animation: fadeOut 3.5s ease 3s forwards;
+        padding: 20px;
         text-align: center;
-        transition:
-          transform 0.2s ease,
-          box-shadow 0.6s ease;
-      }
-      .card.glow {
-        box-shadow:
-          0 0 80px rgba(255, 111, 183, 0.45),
-          0 0 140px rgba(255, 111, 183, 0.25);
       }
 
-      /* Text */
-      h1 {
-        font-size: clamp(1.4rem, 4.5vw, 2.3rem);
-        margin-bottom: 12px;
-      }
-      p {
-        font-size: clamp(0.95rem, 3.8vw, 1.15rem);
-        line-height: 1.8;
-        white-space: pre-line;
-      }
-      .hidden {
-        display: none;
+      #intro h1 {
+        font-size: clamp(2rem, 6vw, 3.5rem);
+        letter-spacing: 14px;
+        color: #e50914;
+        text-shadow: 0 0 35px rgba(229, 9, 20, 0.8);
+        animation: zoom 2s ease;
       }
 
-      /* Inputs */
-      input,
-      button {
-        width: 100%;
-        max-width: 320px;
-        padding: 14px 18px;
-        margin: 10px auto;
-        display: block;
-        border-radius: 999px;
-        background: transparent;
-        border: 2px solid var(--neon);
-        color: var(--neon);
-        font-size: 1rem;
-      }
-      button {
-        cursor: pointer;
-        transition: 0.35s;
-      }
-      button:hover {
-        background: var(--neon);
-        color: #000;
-        box-shadow: 0 0 25px var(--neon);
+      #intro p {
+        margin-top: 12px;
+        letter-spacing: 6px;
+        color: #ffffff;
+        opacity: 0;
+        animation: fadeIn 2s ease 1s forwards;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        font-size: clamp(0.8rem, 2.5vw, 1rem);
       }
 
-      /* Cursor */
-      .cursor {
-        display: inline-block;
-        width: 8px;
-        height: 1em;
-        background: var(--neon);
-        animation: blink 1s infinite;
-      }
-      @keyframes blink {
-        50% {
-          opacity: 0;
-        }
-      }
-
-      /* Hearts */
-      .heart {
-        position: absolute;
-        font-size: 22px;
-        pointer-events: none;
-        animation: floatUp linear infinite;
-      }
-      @keyframes floatUp {
+      @keyframes zoom {
         from {
-          transform: translateY(120vh) scale(0.6);
+          transform: scale(0.6);
           opacity: 0;
-        }
-        30% {
-          opacity: 1;
         }
         to {
-          transform: translateY(-20vh) scale(1.4);
-          opacity: 0;
+          transform: scale(1);
+          opacity: 1;
         }
       }
 
-      /* Final line pulse */
-      .final {
-        color: var(--pink);
-        text-shadow:
-          0 0 10px rgba(255, 111, 183, 0.8),
-          0 0 30px rgba(255, 111, 183, 0.6);
-        animation: pulse 1.6s ease-in-out infinite;
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
       }
+
+      @keyframes fadeOut {
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+
+      /* =========================
+   LOGIN
+========================= */
+      #login {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: radial-gradient(circle, #120000, #000);
+        z-index: 500;
+        padding: 20px;
+        text-align: center;
+      }
+
+      h2 {
+        color: #fff;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+      }
+
+      input {
+        padding: 12px;
+        width: clamp(180px, 70vw, 260px);
+        border-radius: 10px;
+        border: none;
+        text-align: center;
+        margin-top: 10px;
+        background: #111;
+        color: #fff;
+        outline: none;
+      }
+
+      button {
+        margin-top: 15px;
+        padding: 10px 25px;
+        border: none;
+        background: #e50914;
+        color: white;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+      }
+
+      /* =========================
+   SCENES
+========================= */
+      .scene {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: 2s ease;
+        pointer-events: none;
+        padding: 20px;
+      }
+
+      .scene.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* =========================
+   SCENE 1
+========================= */
+      #scene1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle, #1a0000, #000);
+        text-align: center;
+      }
+
+      .title {
+        font-size: clamp(1.5rem, 5vw, 2.4rem);
+        color: #e50914;
+        letter-spacing: 5px;
+        text-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
+        animation: pulse 2s infinite alternate;
+      }
+
       @keyframes pulse {
+        from {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        to {
+          transform: scale(1.05);
+          opacity: 1;
+        }
+      }
+
+      /* =========================
+   SCENE 2 CARD
+========================= */
+      .card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: clamp(260px, 80vw, 360px);
+        padding: 22px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.07);
+        backdrop-filter: blur(20px);
+        text-align: center;
+        box-shadow: 0 0 80px rgba(229, 9, 20, 0.25);
+      }
+
+      .card img {
+        width: clamp(90px, 30vw, 140px);
+        height: clamp(90px, 30vw, 140px);
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #e50914;
+        box-shadow: 0 0 35px rgba(229, 9, 20, 0.5);
+        animation: breath 3s infinite ease-in-out;
+      }
+
+      @keyframes breath {
         0%,
         100% {
           transform: scale(1);
@@ -192,191 +215,242 @@
           transform: scale(1.04);
         }
       }
+
+      h1 {
+        font-family: Playfair Display;
+        color: #ffffff;
+        margin-top: 10px;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+      }
+
+      .crown {
+        font-size: clamp(24px, 6vw, 34px);
+        color: #ffd700;
+        animation: float 2s infinite ease-in-out;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      }
+
+      @keyframes float {
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      #letter {
+        margin-top: 12px;
+        font-size: clamp(12px, 2.8vw, 14px);
+        min-height: 120px;
+        line-height: 1.6;
+        opacity: 0;
+        transition: 1s;
+        color: #f1f1f1;
+      }
+
+      /* =========================
+   SCENE 3
+========================= */
+      #scene3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      #gift {
+        font-size: clamp(60px, 20vw, 90px);
+        opacity: 0;
+        transform: scale(0);
+        transition: 2s;
+        filter: drop-shadow(0 0 10px gold);
+      }
+
+      #cake {
+        font-size: clamp(65px, 22vw, 95px);
+        opacity: 0;
+        transition: 2s;
+        filter: drop-shadow(0 0 10px #e50914);
+      }
+
+      /* =========================
+   CANVAS FX
+========================= */
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* MUSIC */
+      audio {
+        display: none;
+      }
     </style>
   </head>
 
   <body>
-    <canvas id="galaxy"></canvas>
-    <canvas id="qr"></canvas>
-    <div id="vignette"></div>
+    <canvas id="fx"></canvas>
 
-    <div class="card" id="card">
-      <h1>BIOMETRIC LOCK 🔐</h1>
-      <p>Enter access key to continue</p>
-      <input id="pass" placeholder="Access Key" />
-      <button id="unlock">SCAN</button>
-      <h1 id="granted" class="hidden">ACCESS GRANTED ✅</h1>
-      <p id="msg" class="hidden"></p>
+    <!-- NETFLIX INTRO -->
+    <div id="intro">
+      <h1>NETFLIX</h1>
+      <p>BROOKLYN CINEMATIC EXPERIENCE</p>
     </div>
 
+    <!-- LOGIN -->
+    <div id="login">
+      <h2>Enter Access Code</h2>
+      <input id="code" placeholder="Brooklyn" />
+      <button onclick="unlock()">Unlock</button>
+    </div>
+
+    <!-- SCENES -->
+    <div id="scene1" class="scene active">
+      <div class="title">Chapter I — The Awakening</div>
+    </div>
+
+    <div id="scene2" class="scene">
+      <div class="card">
+        <div class="crown">👑</div>
+        <img src="her-photo.jpeg" />
+        <h1>Porsche</h1>
+        <div id="letter"></div>
+      </div>
+    </div>
+
+    <div id="scene3" class="scene">
+      <div id="gift">🎁</div>
+      <div id="cake">🎂</div>
+    </div>
+
+    <audio id="music" src="heaven-sent.mp3"></audio>
+
     <script>
-      const card = document.getElementById('card');
-      const pass = document.getElementById('pass');
-      const unlock = document.getElementById('unlock');
-      const granted = document.getElementById('granted');
-      const msg = document.getElementById('msg');
-      const qr = document.getElementById('qr');
-      const vignette = document.getElementById('vignette');
-      let music;
-
-      /* Galaxy */
-      const galaxy = document.getElementById('galaxy');
-      const gtx = galaxy.getContext('2d');
-      let w, h, stars;
-      function resize() {
-        w = galaxy.width = innerWidth;
-        h = galaxy.height = innerHeight;
-        stars = [...Array(140)].map(() => ({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          z: Math.random() * w,
-        }));
-      }
-      addEventListener('resize', resize);
-      resize();
-      (function animate() {
-        gtx.fillStyle = '#04090f';
-        gtx.fillRect(0, 0, w, h);
-        stars.forEach((s) => {
-          s.z -= 2;
-          if (s.z <= 0) s.z = w;
-          const x = (s.x - w / 2) * (w / s.z) + w / 2;
-          const y = (s.y - h / 2) * (w / s.z) + h / 2;
-          gtx.fillStyle = '#00ffd5';
-          gtx.fillRect(x, y, 2, 2);
-        });
-        requestAnimationFrame(animate);
-      })();
-
-      /* QR */
-      function syncQR() {
-        const s = qr.getBoundingClientRect().width;
-        qr.width = s;
-        qr.height = s;
-      }
-      function generateQR(text) {
-        const ctx = qr.getContext('2d'),
-          size = qr.width,
-          cell = 8;
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, size, size);
-        ctx.fillStyle = '#00ffd5';
-        let seed = 0;
-        for (const c of text) seed += c.charCodeAt(0);
-        for (let y = 0; y < size; y += cell)
-          for (let x = 0; x < size; x += cell) {
-            seed = (seed * 9301 + 49297) % 233280;
-            if (seed / 233280 > 0.5) ctx.fillRect(x, y, cell - 1, cell - 1);
-          }
+      function show(id) {
+        document
+          .querySelectorAll('.scene')
+          .forEach((s) => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
       }
 
-      /* Unlock */
-      unlock.onclick = () => {
-        if (pass.value.trim().toLowerCase() === 'omoh') {
-          music = new Audio('just-a-dream.mp3');
-          music.loop = true;
-          music.volume = 0.6;
-          music.muted = true;
-          music.play().then(() => (music.muted = false));
+      function unlock() {
+        let code = document.getElementById('code').value.toLowerCase().trim();
+        if (code === 'brooklyn') {
+          document.getElementById('login').style.display = 'none';
+          document.getElementById('music').play();
 
-          pass.remove();
-          unlock.remove();
-          granted.classList.remove('hidden');
-          msg.classList.remove('hidden');
-          qr.style.display = 'block';
-          syncQR();
-          generateQR('You + Me = ❤️');
+          startFX();
 
-          typeText(`Target Name: Omoh 🌹
+          setTimeout(() => show('scene1'), 400);
+          setTimeout(() => show('scene2'), 4200);
+          setTimeout(typeWriter, 1500);
+          setTimeout(() => show('scene3'), 14000);
+          setTimeout(openGift, 14500);
+        } else alert('Wrong code');
+      }
 
-Running emotional scan...
-Analyzing heart protocols...
-Bypassing defenses...
+      function typeWriter() {
+        let text = `Happy Birthday Porsche ❤️
 
-Result found 💖
+Today is not ordinary.
+It is a celebration of presence, of warmth, of light.
 
-Somehow, every version of my happiness
-keeps resolving back to you.
+You carry a rare kind of beauty,
+the kind that doesn’t ask for attention,
+but naturally becomes unforgettable. Happy birthday babe😘 I love you so much ❤🌹`;
 
-This may look like code,
-but the truth is simple:
-
-You + Me = 🥰❤️`);
-
-          heartNova();
-        } else {
-          pass.value = '';
-          pass.placeholder = 'ACCESS DENIED ❌';
-        }
-      };
-
-      /* Typewriter with finale trigger */
-      function typeText(t) {
         let i = 0;
-        msg.textContent = '';
-        const cur = document.createElement('span');
-        cur.className = 'cursor';
-        msg.appendChild(cur);
-        const timer = setInterval(() => {
-          if (i < t.length) {
-            cur.before(t[i++]);
-            if (t.slice(0, i).endsWith('You + Me = 🥰❤️')) {
-              finale();
-            }
-          } else {
-            clearInterval(timer);
-            cur.remove();
+        let el = document.getElementById('letter');
+        el.style.opacity = 1;
+
+        function write() {
+          if (i < text.length) {
+            el.innerHTML += text[i++];
+            let delay = text[i] === '.' || text[i] === ',' ? 110 : 28;
+            setTimeout(write, delay);
           }
-        }, 30);
+        }
+        write();
       }
 
-      /* Finale effects */
-      let finaleDone = false;
-      function finale() {
-        if (finaleDone) return;
-        finaleDone = true;
-        card.classList.add('glow');
-        vignette.style.opacity = 1;
+      function openGift() {
+        let g = document.getElementById('gift');
+        let c = document.getElementById('cake');
 
-        // music swell
-        let v = music.volume;
-        const swell = setInterval(() => {
-          v = Math.min(1, v + 0.05);
-          music.volume = v;
-          if (v >= 1) clearInterval(swell);
-        }, 120);
+        g.style.opacity = 1;
+        g.style.transform = 'scale(1.3)';
 
-        // mark last line
-        setTimeout(() => {
-          const lines = msg.innerHTML.split('<br>');
-          lines[lines.length - 1] =
-            `<span class="final">${lines[lines.length - 1]}</span>`;
-          msg.innerHTML = lines.join('<br>');
-        }, 300);
+        setTimeout(() => (c.style.opacity = 1), 1200);
       }
 
-      /* Hearts */
-      function heartNova() {
-        for (let i = 0; i < 60; i++) {
-          setTimeout(() => {
-            const h = document.createElement('div');
-            h.className = 'heart';
-            h.textContent = Math.random() > 0.5 ? '❤️' : '💖';
-            h.style.left = Math.random() * 100 + 'vw';
-            h.style.animationDuration = Math.random() * 4 + 4 + 's';
-            document.body.appendChild(h);
-            setTimeout(() => h.remove(), 20000);
-          }, i * 80);
+      const canvas = document.getElementById('fx');
+      const ctx = canvas.getContext('2d');
+
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+
+      let P = [];
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * innerWidth;
+          this.y = Math.random() * innerHeight;
+          this.vx = (Math.random() - 0.5) * 2.2;
+          this.vy = (Math.random() - 0.5) * 2.2;
+          this.life = 160;
+          this.color = ['#e50914', '#ffffff', '#ffd700'][
+            Math.floor(Math.random() * 3)
+          ];
+          this.size = Math.random() * 2.5;
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.fillStyle = this.color;
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.life--;
+          this.draw();
         }
       }
 
-      /* Parallax */
-      if (matchMedia('(hover:hover)').matches) {
-        addEventListener('mousemove', (e) => {
-          const x = (e.clientX / innerWidth - 0.5) * 12;
-          const y = (e.clientY / innerHeight - 0.5) * 12;
-          card.style.transform = `rotateX(${-y}deg) rotateY(${x}deg)`;
+      function burst() {
+        for (let i = 0; i < 55; i++) {
+          P.push(new Particle());
+        }
+      }
+
+      function star() {
+        let p = new Particle();
+        p.y = 0;
+        p.vy = 3.8;
+        P.push(p);
+      }
+
+      function loop() {
+        ctx.fillStyle = 'rgba(0,0,0,0.25)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        P.forEach((p, i) => {
+          p.update();
+          if (p.life <= 0) P.splice(i, 1);
         });
+
+        requestAnimationFrame(loop);
+      }
+
+      function startFX() {
+        setInterval(burst, 800);
+        setInterval(star, 500);
+        loop();
       }
     </script>
   </body>
